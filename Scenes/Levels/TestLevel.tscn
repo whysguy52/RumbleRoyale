@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scenes/Levels/Level.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Levels/lightworld_large.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/ball_rigid_body.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Levels/Level1Example.wav" type="AudioStream" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 321.768, 755.625 )
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 16.5713
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -20.0
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 10, 10 )
+texture = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( -162.983, 7286.16 )
+scale = Vector2( 595.181, -471.234 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0.361485, 0.301443 )
+shape = SubResource( 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+scale = Vector2( 1.22797, 0.987526 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -720.921, 1320.42 )
+shape = SubResource( 2 )
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2( -724.858, 539.468 )
+scale = Vector2( 1, 1.0017 )
+gravity_scale = 0.0
+linear_damp = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="RigidBody2D"]
+texture = ExtResource( 4 )
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

@@ -1,0 +1,51 @@
+extends Node
+
+const PORT = 19283
+
+var playerList : Dictionary = {}
+var myPlayerInfo = {"userName": ""} #when i get more characters, add collumn with the characters name
+
+signal new_client_connected
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	get_tree().connect("network_peer_connected", self, "_player_connected")
+
+#
+#	SERVER CODE
+#
+
+#called from PreLobbyMenu when "CreateLobby" is clicked
+func create_server():
+	var peer = NetworkedMultiplayerENet.new()
+	peer.create_server(PORT, 3)
+	get_tree().network_peer = peer
+	add_player_to_list(1, myPlayerInfo)
+
+#
+#	CLIENT CODE
+#
+
+#called from the "Join" button
+func connect_to_server():
+	var peer = NetworkedMultiplayerENet.new()
+	peer.create_client("127.0.0.1", PORT)
+	get_tree().network_peer = peer
+	add_player_to_list(get_tree().get_network_unique_id(), myPlayerInfo)
+
+#
+#	BOTH CODE
+#
+
+#this signal handler is called on all clients and server
+func _player_connected(id):
+	rpc_id(id, "register_player", myPlayerInfo)
+
+remote func register_player(info):
+	var id = get_tree().get_rpc_sender_id()
+	add_player_to_list(id, info)
+	
+
+func add_player_to_list(id, info):
+	playerList[id] = info
+	print_debug(playerList)
