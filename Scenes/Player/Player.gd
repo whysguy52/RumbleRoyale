@@ -25,7 +25,9 @@ func process_input():
 	calculate_stamina()
 	velocity *= speed
 	move_and_slide(velocity)
-	run_animation()
+	rpc("position_update", position)
+	rpc("run_animation", velocity)
+	run_animation(velocity)
 	
 	#Punching
 	if Input.is_action_just_pressed("LMB"):
@@ -35,9 +37,10 @@ func process_input():
 	if Input.is_action_just_released("LMB"):
 		$Fist.release_punch()
 
+puppet func position_update(position):
+	self.position = position
 
-
-func run_animation():
+puppet func run_animation(velocity):
 	
 	if velocity.x < 0 and velocity.length() != 0 :
 		$AnimatedSprite.flip_h = true
