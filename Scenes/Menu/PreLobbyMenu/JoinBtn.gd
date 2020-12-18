@@ -14,5 +14,5 @@ func _ready():
 func _on_JoinBtn_clicked(event):
 	if event.is_action_pressed("LMB"):
 		NetworkManager.myPlayerInfo["userName"] = get_parent().get_node("NameEntry").text
-		NetworkManager.connect_to_server(get_parent().get_node("JoinBtn").text)
+		NetworkManager.connect_to_server(get_parent().get_node("ServerAddress").text)
 		get_tree().change_scene("res://Scenes/Menu/Lobby/Lobby.tscn")
