@@ -16,10 +16,10 @@ func _ready():
 #	pass
 
 func _on_Area2D_body_entered(body):
-	if body.get_name() == "Player":
+	if body.get_tree().get_network_unique_id() == get_tree().get_network_unique_id():
 		$AudioStreamPlayer.play()
 
 
 func _on_Area2D_body_exited(body):
-	if body.get_name() == "Player":
+	if body.get_tree().get_network_unique_id() == get_tree().get_network_unique_id():
 		$AudioStreamPlayer.stop()

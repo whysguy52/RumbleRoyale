@@ -1,7 +1,7 @@
 extends Area2D
 
 export var damage = 10
-var punch_counter = 0
+var punchCounter = 0
 var fistCollision
 
 
@@ -17,7 +17,7 @@ func _ready():
 #	pass
 
 func punch():
-	$Sprite.frame = punch_counter % 2
+	$Sprite.frame = punchCounter % 2
 	if position.x < 0:
 		$Sprite.flip_v = true
 	else:
@@ -25,10 +25,28 @@ func punch():
 	
 	fistCollision.disabled = false
 	visible = true
-	punch_counter += 1
+	rpc("punch_update",position, rotation_degrees, $Sprite.flip_v, visible, $Sprite.frame)
+	
+	punchCounter += 1
 	$Sprite/DisplayTime.start()
+	
+	
+
+puppet func punch_update(position: Vector2, rotation_degrees, flip_v: bool, visible: bool, fistFrame):
+	$Sprite.frame = fistFrame
+	$Sprite.flip_v = flip_v
+	$Sprite/DisplayTime.start()
+	
+	self.position = position
+	self.rotation_degrees = rotation_degrees
+	self.visible = visible
+	
 
 func release_punch():
+	remote_release_punch()
+	rpc("remote_release_punch")
+
+puppet func remote_release_punch():
 	fistCollision.disabled = true
 	visible = false
 
