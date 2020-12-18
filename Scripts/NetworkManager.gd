@@ -30,9 +30,9 @@ func begin_game():
 #
 
 #called from the "Join" button
-func connect_to_server():
+func connect_to_server(address):
 	var peer = NetworkedMultiplayerENet.new()
-	peer.create_client("127.0.0.1", PORT)
+	peer.create_client(address, PORT)
 	get_tree().network_peer = peer
 	add_player_to_list(get_tree().get_network_unique_id(), myPlayerInfo)
 
