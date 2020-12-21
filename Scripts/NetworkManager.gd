@@ -53,7 +53,6 @@ remote func register_player(info):
 func add_player_to_list(id, info):
 	playerList[id] = info
 	emit_signal("player_added_to_list")
-	print_debug(playerList)
 
 remote func start_game():
 	
@@ -69,6 +68,8 @@ remote func start_game():
 	get_tree().get_root().add_child(next_level)
 	
 	var player_scene = load("res://Scenes/Player/Player.tscn")
+	
+	print_debug(playerList)
 	
 	for p_id in playerList:
 		var player = player_scene.instance()

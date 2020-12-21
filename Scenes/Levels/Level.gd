@@ -16,7 +16,8 @@ func _ready():
 #	pass
 
 func _on_Area2D_body_entered(body):
-	if body.get_tree().get_network_unique_id() == get_tree().get_network_unique_id():
+	if body.get_name().to_int() == get_tree().get_network_unique_id():
+		print_debug(body.get_name(), ",", get_tree().get_network_unique_id())
 		$AudioStreamPlayer.play()
 
 
