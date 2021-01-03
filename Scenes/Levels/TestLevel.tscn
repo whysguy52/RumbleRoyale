@@ -1,11 +1,16 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
+[ext_resource path="res://Scenes/Levels/CitySoundtrack.wav" type="AudioStream" id=1]
 [ext_resource path="res://Scenes/Levels/Level.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Levels/lightworld_large.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/ball_rigid_body.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/Levels/Level1Example.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1.06626, 1.67916 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 2403.1, 1920.27 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 321.768, 755.625 )
@@ -16,21 +21,32 @@ radius = 16.5713
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="RockLevel" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+volume_db = -20.0
+
+[node name="CityAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
 volume_db = -20.0
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 10, 10 )
 texture = ExtResource( 3 )
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2( -162.983, 7286.16 )
+[node name="RockArea" type="Area2D" parent="."]
+position = Vector2( 4.53061, 3044.65 )
 scale = Vector2( 595.181, -471.234 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0.361485, 0.301443 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RockArea"]
+position = Vector2( -0.000389424, -0.000134468 )
 shape = SubResource( 1 )
+
+[node name="CityArea" type="Area2D" parent="."]
+position = Vector2( 9.36133, -1317.73 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CityArea"]
+position = Vector2( 6.54639, -6.54639 )
+shape = SubResource( 4 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 scale = Vector2( 1.22797, 0.987526 )
@@ -50,5 +66,7 @@ shape = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="RigidBody2D"]
 texture = ExtResource( 4 )
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="RockArea" to="." method="_on_RockArea_body_entered"]
+[connection signal="body_exited" from="RockArea" to="." method="_on_RockArea_body_exited"]
+[connection signal="body_entered" from="CityArea" to="." method="_on_CityArea_body_entered"]
+[connection signal="body_exited" from="CityArea" to="." method="_on_CityArea_body_exited"]

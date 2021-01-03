@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/CitySoundtrack.wav-afc7f29aec2af08cf828a7aa242e0d01.sample"
+
+[deps]
+
+source_file="res://Scenes/Levels/CitySoundtrack.wav"
+dest_files=[ "res://.import/CitySoundtrack.wav-afc7f29aec2af08cf828a7aa242e0d01.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

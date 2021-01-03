@@ -15,12 +15,30 @@ func _ready():
 #func _process(delta):
 #	pass
 
-func _on_Area2D_body_entered(body):
+
+func _on_Area2D2_body_entered(body):
+	pass # Replace with function body.
+
+
+func _on_Rock_Area2D_body_entered():
+	pass # Replace with function body.
+
+
+func _on_RockArea_body_entered(body):
 	if body.get_name().to_int() == get_tree().get_network_unique_id():
-		print_debug(body.get_name(), ",", get_tree().get_network_unique_id())
-		$AudioStreamPlayer.play()
+		$RockLevel.play()
 
 
-func _on_Area2D_body_exited(body):
+func _on_RockArea_body_exited(body):
 	if body.get_tree().get_network_unique_id() == get_tree().get_network_unique_id():
-		$AudioStreamPlayer.stop()
+		$RockLevel.stop()
+
+
+func _on_CityArea_body_entered(body):
+	if body.get_name().to_int() == get_tree().get_network_unique_id():
+		$CityAudio.play()
+
+
+func _on_CityArea_body_exited(body):
+	if body.get_name().to_int() == get_tree().get_network_unique_id():
+		$CityAudio.stop()

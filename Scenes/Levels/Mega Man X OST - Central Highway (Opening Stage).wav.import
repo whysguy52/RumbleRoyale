@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Mega Man X OST - Central Highway (Opening Stage).wav-264351b4e59469532f1b5fc55a9a6cb4.sample"
+
+[deps]
+
+source_file="res://Scenes/Levels/Mega Man X OST - Central Highway (Opening Stage).wav"
+dest_files=[ "res://.import/Mega Man X OST - Central Highway (Opening Stage).wav-264351b4e59469532f1b5fc55a9a6cb4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
